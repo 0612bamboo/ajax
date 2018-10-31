@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    var xhr= new XMLHttpRequest()
+    xhr.open('GET','https://easy-mock.com/mock/5bd4023bd55d2a78f7e22d19/gettype',true)
+    xhr.onload=function(){
+        console.log(xhr.status)
+        if(((xhr.status >=200)&&xhr.status <300)||xhr.status===304){
+            console.log(this.responseText)
+        }else{
+            console.log('fail')
+        }
+    xhr.onerror=function(){
+        console.log('error')
+    }
+}
+    xhr.send()
+    </script>
+</body>
+</html>

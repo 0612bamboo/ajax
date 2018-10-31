@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// 1、采用同步的方式获得数据
+// var xhr =new XMLHttpRequest()
+// xhr.open('GET','hello.json',false)
+// xhr.send()
+// var data =xhr.responseText
+// console.log(data)
+// ps：采用同步的方式，也能获得数据，但是时间比较长，差不多22ms，效率不高。
+// 把false改成true，就可以变异步。xhrsend之后立刻就执行，返回数据的操作，导致没有数据返回。
+// 如果异步也能获取事件，就需要绑定load事件，等加载后再执行var data= xhr.responseText，才返回数据
+
+// 2、采用异步绑定事件的方式获取数据 
+//   var xhr =new XMLHttpRequest()
+//     xhr.open('GET','hello.json',true)
+//     xhr.send()
+//     xhr.addEventListener('load',function(){
+//     var data= xhr.responseText
+//     console.log(data)
+//     console.log(xhr.status)
+//     })  
+/* 异步绑定数据，需要绑定load事件*/
+
+// 3、readystate和status用法
+var xhr= new XMLHttpRequest()
+xhr.timeout=13
+xhr.open('GET','hello.json',true)
+xhr.send()
+
+xhr.addEventListener('load',function(){
+    console.log(xhr.status)
+    if((xhr.status>=200 && xhr.status<300)||xhr.status==304){
+        console.log(this.responseText)
+    }else{
+        console.log('fail')
+    }
+})
+xhr.ontimeout=function(e){
+    console.log('timeout')
+}
+xhr.onerror=function(){
+    console.log('error')
+}
+// 4、readystate状态来判断输出
+// var xhr= new XMLHttpRequest()
+// xhr.open('GET','hello.json',true)
+// xhr.send()
+// xhr.onreadystatechange = function(){
+//     if(xhr.readyState === 4){
+// // redyState的s一定要大写，不然不输出，但绑定事件的onreadystatechange是小写
+//         if((xhr.status>=200 && xhr.status<300 ) ||xhr.status==304){
+//         console.log(xhr.responseText)
+//     }else{
+//         console.log('fail')
+//     }}  
+// }
+ 
+    </script>
+    哈哈哈哈
+</body>
+</html>
